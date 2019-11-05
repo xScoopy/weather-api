@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather</title>
+  </head>
+  <body>
+
+    <!-- Weather form -->
+    <div class="container">
+      <form id="form">
+        <label>
+          Zip Code
+          <input 
+            id="input-zip"
+            type="number" 
+            placeholder="Enter Zip"
+            title="Please Enter a valid Zip Code"
+            pattern="^\d{5}(?:[-\s]\d{4})?$">
+        </label>
+        <select id="select-unit">
+          <option selected value="imperial">F</option>
+          <option value="metric">C</option>
+        </select>
+        <button type="submit">Zip</button>
+      </form>
+
+      <!-- Get Geo Coords -->
+      <button id="use-location">Use Location</button>
+
+      <!-- Display Weather Data -->
+      <div class="weather">
+        <div class="icon"></div>
+        <div class="temp"></div>
+        <div class="desc"></div>
+        <time class="time"></time>
+        <div class="clouds"></div>
+      </div>
+    </div>
+
+    <!-- *********** Scripts ************ -->
+
+    <!-- Lib - Weather -->
+    <script src="./index.js"></script>
+
+    <!-- Client Code -->
+    <script>
+      const form = document.getElementById('form')
+      const inputZip = document.getElementById('input-zip')
+      const locationButton = document.getElementById('use-location')
+      const selectUnit = document.getElementById('select-unit')
+      const temp = document.querySelector('.temp')
+      const desc = document.querySelector('.desc')
+      const clouds = document.querySelector('.clouds')
+      const icon = document.querySelector('.icon')
+
+      form.onsubmit = function(e) {
+        console.log('subbmit weather form')
+        e.preventDefault()
+        const zip = inputZip.value
+        getWeather(zip)
+      }
+
+      function handleJson(json) {
+        icon.innerHTML = json.weather[0].icon
+        clouds.innerHTML = json.clouds.all
+        temp.innerHTML = json.main.temp
+        desc.innerHTML = json.weather[0].description
+        console.log(json)
+      }
+
+      locationButton.onclick = function(e) {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(function handleCoords(position) {
+            console.log(position.coords.latitude, position.coords.longitude);
+          }, function handleError(err) {
+            console.log(err.message)
+          });
+        } else {
+          /* geolocation IS NOT available */
+          console.log('geolocation is not available')
+        }
+      } 
+      
+    </script>
+  </body>
+</html>
