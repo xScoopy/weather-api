@@ -19,8 +19,10 @@ Imagine you want to turn the code in index.js into a library that could be used 
   - Pass the error message to the error callback as a parameter.
 - What other improvements can you make?
   - Take a look at the JSON returned from openweathermap.org it's pretty confusing. How would you improve on this? Returing a more organized and better labeled Object would be a big improvement. 
-  - The open weather map takes a unit as a param maybe we can pass that into the `getWeather()` function.
-  - The open weather map API can use a city name or gelocation to get the weather. This could be handled with the single function or with a new function. 
+    - Define a better JSON format for the weather data and pass this to your success callback.
+- The open weather map API takes unit as a param maybe we can pass that into the `getWeather()` function.
+  - Add a parameter that takes unit. This should be a string: 'metric' or 'imperial'. 
+- The open weather map API can use a city name or gelocation to get the weather. This could be handled with the single function or with a new function. 
   - While the single function is good would this work better as a class? Imagine initializing the class with the API key, and calling methods to: 
     - get weather by zip
     - get weather by city
@@ -29,3 +31,5 @@ Imagine you want to turn the code in index.js into a library that could be used 
     -  etc. 
 
 - Bonus question: Take a look at the `navigator.geolocation.getCurrentPosition()` this is not a lot of trouble but maybe it could be improved on by writing a library. How could you improve the geolocation API. 
+  - Make a small library to help using geolocation. 
+  - Use your geolocation library with your weather library.
