@@ -6,12 +6,18 @@ Your goal is to work out the challenges listed below.
 
 Imagine you want to turn the code in index.js into a library that could be used by anyone who wanted to use the OpenWeatherMap API. Currently there are a couple big problems:
 
-- The API key is contained in the function. To be useful anywhere this needs to come from outside the `getWeather()` function. 
-  - Pass the zip into the function as a parameter
-- When the `fetch()` method resolves the second promise it calls a function in the other code block. This isn't going to work well for any other projects that may use this. 
-  - Make handleJson  a callback: pass it in as a parameter. 
-  - How are you going to handle errors? A second callback could be used to handle errors.
-- What other improvements can you make? 
+- The `getWeather()` function is contained `index.html` to be portable it needs to be in a separate file. This will allow anyone to import it into any project.  
+- The API key is contained in the function. To be useful anywhere the API Key needs to come from outside the `getWeather()` function. 
+  - Pass the API Key into the function as a parameter
+- When the `fetch()` method resolves the second promise it sets the temperature and description on elements in the DOM. If the weather fetching were going to be useful anywhere this part would need to be customized for each project. Use callback here.  
+  - `getWeather()` should take a callback as a parameter. 
+  - When fetch resolves execute the callback. 
+  - You'll need to pass your weather data to the callback as a parameter. 
+- How are you going to handle errors? A second callback could be used to handle errors.
+  - `getWeather()` should take a second parameter and to handle errors. 
+  - Execute this second callback in the catch block. 
+  - Pass the error message to the error callback as a parameter.
+- What other improvements can you make?
   - Take a look at the JSON returned from openweathermap.org it's pretty confusing. How would you improve on this? Returing a more organized and better labeled Object would be a big improvement. 
   - The open weather map takes a unit as a param maybe we can pass that into the `getWeather()` function.
   - The open weather map API can use a city name or gelocation to get the weather. This could be handled with the single function or with a new function. 
