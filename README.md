@@ -38,6 +38,18 @@ The goal this time is to add a second callback that will handle errors.
 
 ### Challenge 4
 
+At this point you are getting an idea of how callbacks work. You're probably also getting an idea of where callbacks can be awkward. Promise is an object that was invented to replace callbacks. 
+
+The goal of this challenge is to refactor the `getWeather()` function to return a Promise isnstead of using a callback. 
+
+### Challenge 5
+
+If you haven't already the goal of this section is to use `async` and `await`. 
+
+Refactor your code to use `async` and `await`. Making the `getWeather()` function an `async` function like this `async function getWeather() { ... }` will make it return a Promise. From the outside the code should still work the same as it did before.
+
+### Challenge 6
+
 What other improvements can you make?
 
 - Take a look at the JSON returned from openweathermap.org it's pretty confusing. How would you improve on this? Returing a more organized and better labeled Object would be a big improvement. 
@@ -47,7 +59,7 @@ The goal here is improve on the existing system. A good place to start is the JS
 
 Feel free to make any other improvements you might think of. 
 
-### Challenge 5
+### Challenge 7
 
 The open weather map API takes unit as a param maybe we can pass that into the `getWeather()` function.
 
@@ -55,7 +67,7 @@ The open weather map API takes unit as a param maybe we can pass that into the `
 
 The goal is to add a parameter to the `getWeather()` function that takes the unit. 
 
-### Challenge 6
+### Challenge 8
 
 The open weather map API can use a city name or gelocation to get the weather. This could be handled with the single function or with a new function. 
   
@@ -87,5 +99,92 @@ The goal of this challenge is to create a class that will make an object that ca
 
 ```JS
 const w = new Weather('yourapikey')
-w.getWeather('zipcode')
+w.getWeather('zipcode').then( ... )
 ```
+
+The difference here is that line makes a new **Object**. You'll use the methods and properties of the object to configure and fetch the weather. 
+
+Properties might be values that your object holds for configuration. 
+
+```JS 
+w.apikey = '1234567890'
+w.zip = '94010'
+w.units = 'metric'
+// or 
+w.useMetric = true
+```
+
+Your object will also have methods that execute the code that fetches the weather. 
+
+```js 
+w.getWeatherForZip('94010')
+w.getWeatherForCity('San Francisco')
+w.getWeatherForLocation()
+```
+
+This could be expanded into many other methods. If configuration information like: zip, city, or apikey are already set and held in a property on the object these don't need to be passed here. 
+
+How this all fits together is up to you. 
+
+Here is a starting point: 
+
+```js 
+class Weather {
+  constructor(apikey) {
+    this.apikey = apikey
+  }
+}
+```
+
+Your goal is to define a class that will get the weather data. Define the properties of that class. 
+
+### Challenge 2
+
+Your class needs methods. Write a method that will load the weather data. You can handle this however you think is best. 
+
+Here is a rough idea: 
+
+```js 
+class Weather {
+  constructor(apikey) {
+    this.apikey = apikey
+  }
+
+  getWeather() {
+    fetch()
+    ...
+  }
+}
+```
+
+`getWeather()` now a method of the class can use either a callback or a promise, It's up to you. 
+
+The configuration of API Key should be stored by the class. This way future calls to the method won't need it. 
+
+The zip code could be passed into the method as a parameter or set as a property of the class. It's up to you! In the first case you need to supply it with each call, in the second you only need to supply it once but you'll need to set it again when you want weather from a new location.
+
+### Challenge 3
+
+The current weather data from OpenWeatherMap can provide weather for: 
+
+- city name
+- city id
+- geo coordinates
+- zip code
+
+You should support all of these. An easy way would be to create a method for each. The API can handle each of these type of requests with different query vars. 
+
+- `weatherForCity()`
+- `weatherForId()`
+- `weatherForGeo()`
+- `weatherForZip()`
+
+It would be good to use a helper method to handle fetching data. The methods above would put the URL together and pass it to the helper. 
+
+### Challenge 4
+
+The weather changes through out the day. It might be good to have a method that provides us with periodic updates. 
+
+The goal of this challenge is write a method that will do that. This method should take a call back. Alternatively you could use an event listener. 
+
+The method should also take a number of milliseconds which will set the time between updates. 
