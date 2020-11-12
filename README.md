@@ -4,11 +4,28 @@ This repo contains some starter code that works with the [Open Weather Map API](
 
 Your goal is to work out the challenges listed below. 
 
+## Learning Objectives 
+
+- Implement callbacks to handle asynchromnous actions 
+- Use functions to create callbacks
+- Design functions and Objects that implement callbacks
+- Use Promise to handle asynchronous actions
+- Use aysnc and await to handle Promises
+- Describe Promise it use and function
+
 ## Weather Lib
+
+Take a look at index.html. Open this page in a web browser. Read the code contained in the script tag. Before you begin the challenges below you must understand how the starting project works.
+
+- Talk about discuss the code with another student
+- Describe what is happening in the starter code
+- Make a small change to the code to test your understanding or 
 
 Imagine you want to turn the code in index.js into a library that could be used by anyone who wanted to use the OpenWeatherMap API in any project they might create. Currently there are a couple big problems. 
 
 You are going to adress each of the problems listed below. Check with the instructor as you solve each problem to review your work. 
+
+The challenges below do not go straight to the best possible solution. Instead they work through the problem in steps solving each and refactoring along the way. 
 
 ### Challenge 1
 
@@ -18,13 +35,16 @@ The API key is contained in the function. To be useful anywhere the API Key need
 
 **Pass the API Key into the function as a parameter.**
 
+- Move `getWeather()` to a separate file. 
+- Add a parameter to `getWeather(apiKey)` that accepts the api key as string. 
+
 ### Challenge 2
 
-When the `fetch()` method resolves the second promise it sets the temperature and description on elements in the DOM. If the weather fetching were going to be useful anywhere this part would need to be customized for each project. Use callback here.
+When the `fetch()` method resolves the second promise it sets the temperature and description on elements in the DOM. For this code to be useful in any project code that is specific to this HTML file needs to be removed from `getWeather()` and be handled by a callback. 
 
 - `getWeather()` should take a callback as a parameter. 
-- When fetch resolves execute the callback. 
-- You'll need to pass your weather data to the callback as a parameter.
+- In the `getWeather()` function execute the callback when fetch resolves the weather data api request.  
+- Pass the weather data to the callback function as an argument.
 
 The goal of this challenge is to use a call back to handle the weather data in your developer code. The library code should take in the callback as a parameter to the `getWeather()` function and call it when the data is loaded. 
 
@@ -32,17 +52,19 @@ The goal of this challenge is to use a call back to handle the weather data in y
 
 How are you going to handle errors? A second callback could be used to handle errors.
 
-- `getWeather()` should take a second parameter and to handle errors. 
-- Execute this second callback in the catch block. 
-- Pass the error message to the error callback as a parameter.
+- `getWeather()` should take a second parameter that will be a callback to handle errors. 
+- Execute this second callback in the catch block of your appi call.
+- Pass the error message to the error callback as an argument.
 
 The goal this time is to add a second callback that will handle errors. 
 
 ### Challenge 4
 
-At this point you are getting an idea of how callbacks work. You're probably also getting an idea of where callbacks can be awkward. Promise is an object that was invented to replace callbacks. 
+At this point you are getting an idea of how callbacks work. You're probably also getting an idea of where callbacks can be awkward. A `Promise` is an object that was invented to simplify and streamline asynchronous code.  
 
-The goal of this challenge is to refactor the `getWeather()` function to return a Promise isnstead of using a callback. 
+The goal of this challenge is to refactor the `getWeather()` function to return a Promise instead of using a callback. 
+
+- Refactor your `getWeather(apikey)` function to return a Promise. 
 
 ### Challenge 5
 
@@ -55,7 +77,7 @@ Refactor your code to use `async` and `await`. Making the `getWeather()` functio
 What other improvements can you make?
 
 - Take a look at the JSON returned from openweathermap.org it's pretty confusing. How would you improve on this? Returing a more organized and better labeled Object would be a big improvement. 
-  - Define a better JSON format for the weather data and pass this to your success callback.
+- Define a better JSON format for the weather data and pass this to your success callback.
 
 The goal here is improve on the existing system. A good place to start is the JSON data that is returned from the API. 
 
