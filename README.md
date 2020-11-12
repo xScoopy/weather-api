@@ -6,11 +6,13 @@ Your goal is to work out the challenges listed below.
 
 ## Weather Lib
 
-Imagine you want to turn the code in index.js into a library that could be used by anyone who wanted to use the OpenWeatherMap API. Currently there are a couple big problems:
+Imagine you want to turn the code in index.js into a library that could be used by anyone who wanted to use the OpenWeatherMap API in any project they might create. Currently there are a couple big problems. 
+
+You are going to adress each of the problems listed below. Check with the instructor as you solve each problem to review your work. 
 
 ### Challenge 1
 
-The `getWeather()` function is contained `index.html` to be portable it needs to be in a separate file. This will allow anyone to import it into any project.  
+The `getWeather()` function is contained `index.html` to be portable it needs to be in a separate file. This will allow anyone to import it into any project.
 
 The API key is contained in the function. To be useful anywhere the API Key needs to come from outside the `getWeather()` function. 
 
