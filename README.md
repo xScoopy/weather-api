@@ -40,20 +40,20 @@ The API key is contained in the function. To be useful anywhere the API Key need
 
 ### Challenge 2
 
-When the `fetch()` method resolves the second promise it sets the temperature and description on elements in the DOM. For this code to be useful in any project code that is specific to this HTML file needs to be removed from `getWeather()` and be handled by a callback. 
+When the call to `fetch()` resolves the second promise it sets the temperature and description on elements in the DOM. For this code to be useful in any project code that is specific to this HTML references needs to be removed from `getWeather()` and be handled by a callback. 
 
-- `getWeather()` should take a callback as a parameter. 
+- `getWeather()` should take a callback as a parameter.
 - In the `getWeather()` function execute the callback when fetch resolves the weather data api request.  
 - Pass the weather data to the callback function as an argument.
 
-The goal of this challenge is to use a call back to handle the weather data in your developer code. The library code should take in the callback as a parameter to the `getWeather()` function and call it when the data is loaded. 
+The goal of this challenge is to use a call back to handle the weather data in your developer code.  
 
 ### Challenge 3
 
 How are you going to handle errors? A second callback could be used to handle errors.
 
 - `getWeather()` should take a second parameter that will be a callback to handle errors. 
-- Execute this second callback in the catch block of your appi call.
+- Execute this second callback in the catch block of your api call.
 - Pass the error message to the error callback as an argument.
 
 The goal this time is to add a second callback that will handle errors. 
@@ -64,7 +64,7 @@ At this point you are getting an idea of how callbacks work. You're probably als
 
 The goal of this challenge is to refactor the `getWeather()` function to return a Promise instead of using a callback. 
 
-- Refactor your `getWeather(apikey)` function to return a Promise. 
+- Refactor your `getWeather(apikey)` function to return a Promise.
 
 ### Challenge 5
 
@@ -76,10 +76,10 @@ Refactor your code to use `async` and `await`. Making the `getWeather()` functio
 
 What other improvements can you make?
 
-- Take a look at the JSON returned from openweathermap.org it's pretty confusing. How would you improve on this? Returing a more organized and better labeled Object would be a big improvement. 
-- Define a better JSON format for the weather data and pass this to your success callback.
+- Take a look at the JSON returned from openweathermap.org it's pretty confusing. How would you improve on this? Returing a more organized and better labeled Object would be a big improvement.
+- Define a better JSON format for the weather data and pass this to your success callback or return this from your async function. 
 
-The goal here is improve on the existing system. A good place to start is the JSON data that is returned from the API. 
+The goal here is to improve on the existing system. A good place to start is the JSON data that is returned from the API.
 
 Feel free to make any other improvements you might think of. 
 
@@ -89,44 +89,60 @@ The open weather map API takes unit as a param maybe we can pass that into the `
 
 - Add a parameter that takes unit. This should be a string: 'metric' or 'imperial'. 
 
-The goal is to add a parameter to the `getWeather()` function that takes the unit. 
+The goal is to add a parameter to the `getWeather(url, unit)` function that takes the unit.
 
 ### Challenge 8
 
-The open weather map API can use a city name or gelocation to get the weather. This could be handled with the single function or with a new function. 
+The OpenWeatherMap API provides a few different API options that fetch the weather for zip codes, city names, and geolocation. Your code would be more useful if it supported these options. 
+
+You'll either need to create a separate function for each, or use a parameter to idenitfy which method you are using to get the data.
   
 - While the single function is good would this work better as a class? Imagine initializing the class with the API key, and calling methods to: 
-  - get weather by zip
-  - get weather by city
-  - get weather by geolocation
-  - set the unit
-  -  etc. 
+  - get weather by zip - `getWeatherByZip(zip, unit)`
+  - get weather by city - `getWeatherByCity(city, unit)`
+  - get weather by geolocation - `getWeatherByGeo(coords, unit)`
 
-The goal of this challenge it expand the existing system to accept the zip, city name, or geolocation to fetch the weather. You can solve this by creating new functions, by passing new parameters to the existing function. 
+The goal of this challenge it expand the existing system to accept the zip, city name, or geolocation to fetch the weather. You can solve this by creating new functions, by passing new parameters to the existing function.
 
-### Stretch Challenges
+To solve this problem you'll need to look at the [OpenWeatherMap api docs](https://openweathermap.org/current).  
 
-Bonus question: Take a look at the `navigator.geolocation.getCurrentPosition()` this is not a lot of trouble but maybe it could be improved on by writing a library. How could you improve the geolocation API. 
-  
-- Make a small library to help using geolocation. 
-- Use your geolocation library with your weather library.
+Here is a list of the URLs OpenWeatherMap uses: 
+
+- By city name
+  - api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+  - api.openweathermap.org/data/2.5/weather?q={city name},{state code}&appid={API key}
+  - api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
+- By city ID
+  - api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
+- By geocoordinates
+  - api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+- By zip code 
+  - api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
+
+These all begin with:
+
+- api.openweathermap.org/data/2.5/weather?
+
+You can use this to your coding advantage by storing this portion of the url in variable and assembling the rest of the url based on which method is called. 
 
 ## OOP Weather
 
 This set of challenges takes the ideas from the previous challenge with the goal of creating an Class that creates a Weather Object can retrieve weather data. 
 
-Using a function covers some most of the use of requesting and returning weather data. Sometimes you'll need something more. Using a class will allow you to create a persistent data structure with the ability to hold it's own configuration. 
+Why create a class? If you needed to get weather for more than one location it might be good to create an instance of an object to handle the weather for each location. Picture a web site or app that that managed the weather for a list of locations. 
+
+Using a function covers some most of the use of requesting and returning weather data. Sometimes you'll need something more. Using a class will allow you to create a persistent data structure with the ability to hold it's own configuration.
 
 ### Challenge 1
 
-The goal of this challenge is to create a class that will make an object that can get the weather data. Imagine the class is Called Weather and it works in this way. 
+The goal of this challenge is to create a class that will make an object that can get the weather data. Imagine the class is Called Weather and it works in this way.
 
 ```JS
 const w = new Weather('yourapikey')
 w.getWeather('zipcode').then( ... )
 ```
 
-The difference here is that line makes a new **Object**. You'll use the methods and properties of the object to configure and fetch the weather. 
+The difference here is that line 1 makes a new **Object**. You'll use the methods and properties of the object to configure and fetch the weather. 
 
 Properties might be values that your object holds for configuration. 
 
@@ -146,11 +162,11 @@ w.getWeatherForCity('San Francisco')
 w.getWeatherForLocation()
 ```
 
-This could be expanded into many other methods. If configuration information like: zip, city, or apikey are already set and held in a property on the object these don't need to be passed here. 
+This could be expanded into many other methods. If configuration information like: zip, city, or apikey are already set and held in a property on the object these don't need to be passed here.
 
-How this all fits together is up to you. 
+How this all fits together is up to you.
 
-Here is a starting point: 
+Here is a starting point:
 
 ```js 
 class Weather {

@@ -92,7 +92,7 @@
       })
 
       // Functions 
-      function getWeather(zip) {
+    function getWeather(zip) {
         const apiKey = '467355df4c808dd6134a3b64e9ace282'
         const units = 'imperial'
         const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
@@ -104,8 +104,7 @@
           })
           .catch(err => console.log(err.message))
       }
-
-
+           
     </script>
   </body>
 </html>
