@@ -68,9 +68,33 @@ The goal of this challenge is to refactor the `getWeather()` function to return 
 
 ### Challenge 5
 
-If you haven't already the goal of this section is to use `async` and `await`. 
+The `async` and `await` keywords are used with Promise to streamline your code. 
 
-Refactor your code to use `async` and `await`. Making the `getWeather()` function an `async` function like this `async function getWeather() { ... }` will make it return a Promise. From the outside the code should still work the same as it did before.
+The `async` key word is used in front of a function for example: 
+
+```JS
+async function getWeather() { ... }
+// or 
+const getWeather = async () => { ... }
+```
+
+A function marked with `async` returns a Promise, even if the code inside the doesn't explicity return a Promise. 
+
+The `await` key word can only be used in `async` functions. Use `await` on any line of code with a Promise to wait for that Promise to resolve. For example: 
+
+```JS
+async function getWeather() {
+  const res = await  fetch(...) // waits here until the promise resolves
+  const json = await res.json() // waits here until the promise resolves
+  return json // returns json wrapped in a Promise
+}
+```
+
+The goal of this section is to use `async` and `await`.
+
+Refactor your code to use `async` and `await`. Making the `getWeather()` function an `async` function. Use the `await` keyword in your function to handle any promises. 
+
+Outside of `getWeather()` at the line where you invoke the function you'll need to handle the promise that it now returns. 
 
 ### Challenge 6
 
