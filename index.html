@@ -90,8 +90,13 @@
       formEl.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        getWeather(zip, "467355df4c808dd6134a3b64e9ace282")
+        getWeather(zip, "467355df4c808dd6134a3b64e9ace282", updateData)
       })
+      
+      const updateData = (data) => {
+        tempEl.innerHTML = data.main.temp
+        descEl.innerHTML = data.weather[0].description
+      }
            
     </script>
   </body>
