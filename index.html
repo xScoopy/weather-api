@@ -74,10 +74,12 @@
       </form>
     </div>
 
-    <script>
+    <script src="./challenge1.js" type="text/javascript">
+      </script>
+      <script>
       // ------------------------------------------------------
       // Developer Code
-
+      
       // Get Element refererences
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
@@ -88,22 +90,8 @@
       formEl.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        getWeather(zip)
+        getWeather(zip, "467355df4c808dd6134a3b64e9ace282")
       })
-
-      // Functions 
-    function getWeather(zip) {
-        const apiKey = '467355df4c808dd6134a3b64e9ace282'
-        const units = 'imperial'
-        const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
-        fetch(path)
-          .then(res => res.json())
-          .then(json => {
-            tempEl.innerHTML = json.main.temp
-            descEl.innerHTML = json.weather[0].description
-          })
-          .catch(err => console.log(err.message))
-      }
            
     </script>
   </body>
