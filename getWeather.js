@@ -10,9 +10,8 @@
     
 //   }
 
-const getWeather = async (zip, apiKey) => {
-    const units = 'imperial'
-    const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
+const getWeather = async (zip, apiKey, unit="imperial") => {
+    const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${unit}`
     const res = await fetch(path)
     const jsonData = await res.json()
     const resolvedJsonData = {
