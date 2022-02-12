@@ -74,7 +74,7 @@
       </form>
     </div>
 
-    <script src="./challenge1.js" type="text/javascript">
+    <script src="./getWeather.js" type="text/javascript">
       </script>
       <script>
       // ------------------------------------------------------
@@ -90,9 +90,12 @@
       formEl.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        getWeather(zip, "467355df4c808dd6134a3b64e9ace282", updateData)
+        const weatherPromise = getWeather(zip, "467355df4c808dd6134a3b64e9ace282")
+        weatherPromise.then((json) => {
+          updateData(json)
+        })
       })
-      
+
       const updateData = (data) => {
         tempEl.innerHTML = data.main.temp
         descEl.innerHTML = data.weather[0].description
