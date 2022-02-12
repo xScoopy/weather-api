@@ -98,15 +98,12 @@
         e.preventDefault();
         const zip = zipInput.value;
         const unit = unitInput.value;
-        const weatherData = await getWeather(zip, "467355df4c808dd6134a3b64e9ace282", unit);
+        const weatherData = await getWeatherZip(zip, "467355df4c808dd6134a3b64e9ace282", unit);
         tempEl.innerHTML = weatherData.temp;
         descEl.innerHTML = weatherData.desc;
         weatherData.unit == "imperial" ? tempEl.innerHTML += " F" : tempEl.innerHTML += " C"
       });
-      // const updateData = async (data) => {
-      //   tempEl.innerHTML = weatherData.temp;
-      //   descEl.innerHTML = weatherData.desc;
-      // };
+
     </script>
   </body>
 </html>
