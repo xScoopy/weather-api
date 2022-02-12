@@ -92,9 +92,10 @@
       formEl.addEventListener("submit", async (e) => {
         e.preventDefault();
         const zip = zipInput.value;
-        const weatherData = await getWeather(zip, "467355df4c808dd6134a3b64e9ace282", "metric");
+        const weatherData = await getWeather(zip, "467355df4c808dd6134a3b64e9ace282");
         tempEl.innerHTML = weatherData.temp;
         descEl.innerHTML = weatherData.desc;
+        weatherData.unit == "imperial" ? tempEl.innerHTML += " F" : tempEl.innerHTML += " C"
       });
       // const updateData = async (data) => {
       //   tempEl.innerHTML = weatherData.temp;

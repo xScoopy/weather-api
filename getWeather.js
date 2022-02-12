@@ -16,7 +16,8 @@ const getWeather = async (zip, apiKey, unit="imperial") => {
     const jsonData = await res.json()
     const resolvedJsonData = {
         "temp" : jsonData.main.temp,
-        "desc" : jsonData.weather[0].description
+        "desc" : jsonData.weather[0].description,
+        "unit" : unit
     }
     return resolvedJsonData 
 }
