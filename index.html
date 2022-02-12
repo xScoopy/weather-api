@@ -73,6 +73,10 @@
           title="Please Enter a valid Zip Code"
           pattern="^\d{5}(?:[-\s]\d{4})?$"
         />
+        <select name="unit" id="unit">
+          <option value="imperial">Imperial</option>
+          <option value="metric">Metric</option>
+        </select>
         <button type="submit">Search</button>
       </form>
     </div>
@@ -87,12 +91,14 @@
       const descEl = document.getElementById("desc");
       const formEl = document.getElementById("form");
       const zipInput = document.getElementById("zip");
+      const unitInput = document.getElementById("unit");
 
       // Define event listeners
       formEl.addEventListener("submit", async (e) => {
         e.preventDefault();
         const zip = zipInput.value;
-        const weatherData = await getWeather(zip, "467355df4c808dd6134a3b64e9ace282");
+        const unit = unitInput.value;
+        const weatherData = await getWeather(zip, "467355df4c808dd6134a3b64e9ace282", unit);
         tempEl.innerHTML = weatherData.temp;
         descEl.innerHTML = weatherData.desc;
         weatherData.unit == "imperial" ? tempEl.innerHTML += " F" : tempEl.innerHTML += " C"
