@@ -95,25 +95,35 @@
       const updateData = (data) => {
         tempEl.innerHTML = data.temp;
         descEl.innerHTML = data.desc;
-      }
+      };
 
       // Define event listeners
       formEl.addEventListener("submit", async (e) => {
         e.preventDefault();
         const zip = zipInput.value;
         const unit = unitInput.value;
-        const weatherData = await getWeatherZip(zip, "467355df4c808dd6134a3b64e9ace282", unit);
-        updateData(weatherData)
-        weatherData.unit == "imperial" ? tempEl.innerHTML += " F" : tempEl.innerHTML += " C"
-        const cityData = await getWeatherCity("san francisco", "467355df4c808dd6134a3b64e9ace282", unit)
-        const latLongData = await getWeatherGeo(44.9778, 93.2650, "467355df4c808dd6134a3b64e9ace282", unit)
-        console.log(cityData, latLongData)
+        const weatherData = await getWeatherZip(
+          zip,
+          "467355df4c808dd6134a3b64e9ace282",
+          unit
+        );
+        updateData(weatherData);
+        weatherData.unit == "imperial"
+          ? (tempEl.innerHTML += " F")
+          : (tempEl.innerHTML += " C");
+        const cityData = await getWeatherCity(
+          "san francisco",
+          "467355df4c808dd6134a3b64e9ace282",
+          unit
+        );
+        const latLongData = await getWeatherGeo(
+          44.9778,
+          93.265,
+          "467355df4c808dd6134a3b64e9ace282",
+          unit
+        );
+        console.log(cityData, latLongData);
       });
-
-      
-
-      
-
     </script>
   </body>
 </html>
